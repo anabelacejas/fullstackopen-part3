@@ -62,6 +62,17 @@ app.post("/api/persons", (request, response) => {
     ...request.body,
   };
 
+  if (persons.some((person) => person.name === newPerson.name)) {
+    return response.status(400).json({
+      error: "name already exist on the phonebook",
+    });
+  }
+  if (!newPerson.name || !newPerson.number) {
+    return response.status(400).json({
+      error: "name or number is missing",
+    });
+  }
+
   persons = persons.concat(newPerson);
   response.json(newPerson);
 });
