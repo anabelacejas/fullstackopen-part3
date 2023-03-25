@@ -57,8 +57,11 @@ app.delete("/api/persons/:id", (request, response) => {
 });
 
 app.post("/api/persons", (request, response) => {
-  const newPerson = request.body;
-  newPerson.id = Math.floor(Math.random() * 1000000);
+  const newPerson = {
+    id: Math.floor(Math.random() * 1000000),
+    ...request.body,
+  };
+
   persons = persons.concat(newPerson);
   response.json(newPerson);
 });
