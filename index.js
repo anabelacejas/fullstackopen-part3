@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 
 morgan.token('data', (req, res) => {
-  return JSON.stringify(req.body)
+  return req.method == 'POST' ? JSON.stringify(req.body) : ' '
 })
 
 app.use(
@@ -24,12 +24,12 @@ let persons = [
     number: '39-44-5323523',
   },
   {
-    id: 2,
+    id: 3,
     name: 'Dan Abramov',
     number: '12-43-234345',
   },
   {
-    id: 3,
+    id: 4,
     name: 'Mary Poppendieck',
     number: '39-23-6423122',
   },
